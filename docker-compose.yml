@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  checkout_service:
+  koa_router:
     build: .
     restart: unless-stopped
     ports:
