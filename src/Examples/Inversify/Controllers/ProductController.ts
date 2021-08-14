@@ -1,12 +1,10 @@
 import { Context, Response } from 'koa';
 import { ProductFinder } from '../Services/Product/ProductFinder';
-import { controller, httpPost, httpPut } from '@decorators';
+import { controller, httpPost, httpPut, httpGet, httpDelete } from '@decorators';
 import { inject, injectable } from 'inversify';
-import { httpGet } from '../../../Decorators/httpGet';
 import { ProductCreator } from '../Services/Product/ProductCreator';
 import { ProductModifier } from '../Services/Product/ProductModifier';
 import { ProductRemover } from '../Services/Product/ProductRemover';
-import { httpDelete } from '../../../Decorators/httpDelete';
 
 @controller('/product')
 @injectable()

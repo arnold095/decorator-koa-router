@@ -1,8 +1,6 @@
 import { controller } from '@decorators';
 import { injectable } from 'inversify';
 
-@controller('/user', () => {
-  console.info('user!');
-})
+@controller('/user')
 @injectable()
 export class UserController {}
