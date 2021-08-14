@@ -11,4 +11,4 @@ services:
       - ./tsconfig.json:/home/node/app/tsconfig.json
       - ./src:/home/node/app/src
       - ./tests:/home/node/app/tests
-    command: bash -c "npm run start:dev"
+    command: bash -c "npm run dev:node-dependency-injection"

@@ -4,7 +4,8 @@
   "description": "Package to declare koa controllers via decorators",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Examples/NodeDependencyInjection/Server.ts -e ts",
+    "dev:node-dependency-injection": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Examples/NodeDependencyInjection/Server.ts -e ts",
+    "dev:inversify": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Examples/Inversify/Server.ts -e ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint '**/src/**/*.ts' --quiet --fix"
   },
@@ -12,6 +13,22 @@
     "type": "git",
     "url": "git+https://github.com/arnold095/decorator-koa-router.git"
   },
+  "keywords": [
+    "Koa",
+    "Router",
+    "Decorators",
+    "Koa rounting decorators",
+    "Inversify",
+    "IOC"
+  ],
+  "tags": [
+    "koa",
+    "koa.js",
+    "typescript",
+    "typescript-koa",
+    "koa-controllers",
+    "controllers"
+  ],
   "author": "arnold095",
   "license": "ISC",
   "devDependencies": {
