@@ -1,13 +1,20 @@
 import Router from '@koa/router';
 import { glob } from 'glob';
-export const RouterBuilder = (
+import { ControllerActionsMapper } from './Utils/ControllerActionsMapper';
+export const RouterBuilder = async (
   prefix: string,
   controllersPath: string
-): Router.Middleware => {
-  const routes = glob.sync(controllersPath);
-  routes.forEach(async (route) => {
-    await import(route);
-  });
+): Promise<Router.Middleware> => {
+  await loadRoutes(controllersPath);
+  const controllers = ControllerActionsMapper();
+  console.info(controllers);
   const router = new Router({ prefix });
   return router.routes();
+};
+
+const loadRoutes = async (controllersPath: string): Promise<void> => {
+  const routes = glob.sync(controllersPath);
+  for (const route of routes) {
+    await import(route);
+  }
 };

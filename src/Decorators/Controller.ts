@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Instantiable } from '../Utils/GenericTypes/Instantiable';
-type ControllerTypes = {
+export type ControllerTypes = {
   target: Instantiable;
   route: string;
   middleware: any;
