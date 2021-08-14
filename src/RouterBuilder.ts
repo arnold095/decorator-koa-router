@@ -16,19 +16,17 @@ export const RouterBuilder = async (
   for (const controller of controllers) {
     if (!controller.actions) continue;
     const instanceOfController = iocAdapter.get<any>(controller.target.name);
-    console.info(controller.middleware);
     for (const action of controller.actions) {
       const apiRoute = `${controller.route}${action.route}`;
       const { method } = action;
       if (action.type === HTTP_METHODS_SUPPORTED.POST) {
-        router.post(
-          apiRoute,
-          controller.middleware,
-          action.middleware,
-          instanceOfController[method].bind(instanceOfController)
-        );
+        router.post(apiRoute, instanceOfController[method].bind(instanceOfController));
       } else if (action.type === HTTP_METHODS_SUPPORTED.PUT) {
         router.put(apiRoute, instanceOfController[method].bind(instanceOfController));
+      } else if (action.type === HTTP_METHODS_SUPPORTED.GET) {
+        router.get(apiRoute, instanceOfController[method].bind(instanceOfController));
+      } else if (action.type === HTTP_METHODS_SUPPORTED.DELETE) {
+        router.delete(apiRoute, instanceOfController[method].bind(instanceOfController));
       }
     }
   }

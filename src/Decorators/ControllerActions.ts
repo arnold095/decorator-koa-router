@@ -11,7 +11,7 @@ export type MethodTypes = {
   type: HTTP_METHODS_SUPPORTED;
   route: string;
   method: string;
-  middleware: (context: Context, next: Next) => Promise<void>;
+  middleware?: (context: Context, next: Next) => Promise<void>;
 };
 
 export type ActionTypes = {

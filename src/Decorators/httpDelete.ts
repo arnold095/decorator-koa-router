@@ -5,13 +5,13 @@ import {
   MethodTypes,
 } from './ControllerActions';
 
-export function httpPut(route: string, middleware?: MethodTypes['middleware']) {
+export function httpDelete(route: string, middleware?: MethodTypes['middleware']) {
   return function (object: Object, methodName: string): void {
     if (!ControllerActions[object.constructor.name]) {
       ControllerActions[object.constructor.name] = [];
     }
     const definition = {
-      type: HTTP_METHODS_SUPPORTED.PUT,
+      type: HTTP_METHODS_SUPPORTED.GET,
       route,
       method: methodName,
       middleware,

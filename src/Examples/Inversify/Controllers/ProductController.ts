@@ -1,29 +1,49 @@
-import { Context, Next } from 'koa';
+import { Context, Response } from 'koa';
 import { ProductFinder } from '../Services/Product/ProductFinder';
 import { controller, httpPost, httpPut } from '@decorators';
 import { inject, injectable } from 'inversify';
+import { httpGet } from '../../../Decorators/httpGet';
+import { ProductCreator } from '../Services/Product/ProductCreator';
+import { ProductModifier } from '../Services/Product/ProductModifier';
+import { ProductRemover } from '../Services/Product/ProductRemover';
+import { httpDelete } from '../../../Decorators/httpDelete';
 
-@controller('/product', async (context: Context, next: Next) => {
-  console.info('Middleware 1');
-  await next();
-})
+@controller('/product')
 @injectable()
 export class ProductController {
-  constructor(@inject('ProductFinder') private readonly productFinder: ProductFinder) {}
+  constructor(
+    @inject('ProductFinder') private readonly productFinder: ProductFinder,
+    @inject('ProductCreator') private readonly productCreator: ProductCreator,
+    @inject('ProductModifier') private readonly productModifier: ProductModifier,
+    @inject('ProductRemover') private readonly productRemover: ProductRemover
+  ) {}
 
-  @httpPost('/', async (context: Context, next: Next) => {
-    console.info('Middleware 2');
-    await next();
-  })
-  public create(context: Context) {
-    const product = this.productFinder.run();
-    console.info(product);
+  @httpGet('/')
+  public async listAll({ response }: Context): Promise<Response> {
+    const product = await this.productFinder.run();
+    response.status = 200;
+    response.body = product;
+    return response;
   }
 
-  @httpPut('/:productId', () => {
-    console.info('Middleware2!!');
-  })
-  public modify(context: Context) {
-    console.info('modify!!!');
+  @httpPost('/')
+  public async create({ response }: Context): Promise<Response> {
+    await this.productCreator.run();
+    response.status = 201;
+    return response;
+  }
+
+  @httpPut('/:productId')
+  public async modify({ response }: Context): Promise<Response> {
+    await this.productModifier.run();
+    response.status = 204;
+    return response;
+  }
+
+  @httpDelete('/:productId')
+  public async remove({ response }: Context): Promise<Response> {
+    await this.productRemover.run();
+    response.status = 200;
+    return response;
   }
 }
