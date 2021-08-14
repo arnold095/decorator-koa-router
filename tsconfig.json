@@ -30,6 +30,7 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
+      "@decorators": ["src/Decorators/"]
     }
   },
   "include": [
