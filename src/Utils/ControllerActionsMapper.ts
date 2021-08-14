@@ -1,5 +1,9 @@
-import { Controllers, ControllerTypes } from '../Decorators/Controller';
-import { ControllerActions, MethodTypes } from '../Decorators/ControllerActions';
+import {
+  Controllers,
+  ControllerTypes,
+  ControllerActions,
+  MethodTypes,
+} from '@decorators';
 
 type ControllerWithActions = {
   actions: MethodTypes[];
