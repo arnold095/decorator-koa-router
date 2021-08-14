@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ControllerActions, HTTP_METHODS_SUPPORTED } from './ControllerActions';
+import {
+  ControllerActions,
+  HTTP_METHODS_SUPPORTED,
+  MethodTypes,
+} from './ControllerActions';
 
-export function httpPut(route: string, middleware: any) {
-  return function (object: Object, methodName: string) {
+export function httpPut(route: string, middleware: MethodTypes['middleware']) {
+  return function (object: Object, methodName: string): void {
     if (!ControllerActions[object.constructor.name]) {
       ControllerActions[object.constructor.name] = [];
     }

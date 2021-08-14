@@ -1,3 +1,5 @@
+import { Context, Next } from 'koa';
+
 export enum HTTP_METHODS_SUPPORTED {
   PUT = 'put',
   POST = 'post',
@@ -9,7 +11,7 @@ export type MethodTypes = {
   type: HTTP_METHODS_SUPPORTED;
   route: string;
   method: string;
-  middleware: any;
+  middleware: (context: Context, next: Next) => Promise<void>;
 };
 
 export type ActionTypes = {
