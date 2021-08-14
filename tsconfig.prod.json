@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": false,
+    "declaration": false,
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests",
+    "src/Examples",
+    "data",
+    "docker",
+    "coverage"
+  ]
+}

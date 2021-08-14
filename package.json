@@ -4,6 +4,7 @@
   "description": "Package to declare koa controllers via decorators",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --build tsconfig.prod.json",
     "dev:node-dependency-injection": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Examples/NodeDependencyInjection/Server.ts -e ts",
     "dev:inversify": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Examples/Inversify/Server.ts -e ts",
     "test": "echo \"Error: no test specified\" && exit 1",
