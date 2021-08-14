@@ -1,0 +1,17 @@
+services:
+  ProductController:
+    class: ../Controllers/ProductController
+    arguments: ['@ProductFinder', '@ProductCreator', '@ProductModifier', '@ProductRemover']
+
+  ProductCreator:
+    class: ../Services/Product/ProductCreator
+
+  ProductFinder:
+    class: ../Services/Product/ProductFinder
+
+  ProductModifier:
+    class: ../Services/Product/ProductModifier
+
+  ProductRemover:
+    class: ../Services/Product/ProductRemover
+
