@@ -1,17 +1,19 @@
-import { Context } from 'koa';
+import { Context, Next } from 'koa';
 import { ProductFinder } from '../Services/Product/ProductFinder';
 import { controller, httpPost, httpPut } from '@decorators';
 import { inject, injectable } from 'inversify';
 
-@controller('/product', () => {
-  console.info('product');
+@controller('/product', async (context: Context, next: Next) => {
+  console.info('Middleware 1');
+  await next();
 })
 @injectable()
 export class ProductController {
   constructor(@inject('ProductFinder') private readonly productFinder: ProductFinder) {}
 
-  @httpPost('/', () => {
-    console.info('entro');
+  @httpPost('/', async (context: Context, next: Next) => {
+    console.info('Middleware 2');
+    await next();
   })
   public create(context: Context) {
     const product = this.productFinder.run();
@@ -19,9 +21,9 @@ export class ProductController {
   }
 
   @httpPut('/:productId', () => {
-    console.info('Put middleware');
+    console.info('Middleware2!!');
   })
   public modify(context: Context) {
-    console.info('EEEEENTRO!!');
+    console.info('modify!!!');
   }
 }
