@@ -12,7 +12,7 @@ export const controller = (
   path: string,
   ...middleware: ControllerTypes['middleware']
 ) => {
-  return function (target: Object & { name: string }): void {
+  return function (target: ControllerTypes['target']): void {
     Controllers.push({
       target,
       route: path,

@@ -1,4 +1,4 @@
-import { Instantiable } from '../../Utils/GenericTypes/Instantiable';
+import { Instantiable } from './GenericTypes/Instantiable';
 
 export type AdapterTypes = {
   controllers?: Instantiable[];
