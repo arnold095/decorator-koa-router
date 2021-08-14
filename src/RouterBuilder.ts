@@ -17,20 +17,35 @@ export const RouterBuilder = async (
     if (!controller.actions) continue;
     const instanceOfController = iocAdapter.get<any>(controller.target.name);
     for (const action of controller.actions) {
+      const middlewares = [...controller.middleware, ...action.middleware];
       const apiRoute = `${controller.route}${action.route}`;
       const { method } = action;
       if (action.type === HTTP_METHODS_SUPPORTED.POST) {
         router.post(
           apiRoute,
-          ...controller.middleware,
+          ...middlewares,
           instanceOfController[method].bind(instanceOfController)
         );
       } else if (action.type === HTTP_METHODS_SUPPORTED.PUT) {
-        router.put(apiRoute, instanceOfController[method].bind(instanceOfController));
+        router.put(
+          apiRoute,
+          ...middlewares,
+          instanceOfController[method].bind(instanceOfController)
+        );
       } else if (action.type === HTTP_METHODS_SUPPORTED.GET) {
-        router.get(apiRoute, instanceOfController[method].bind(instanceOfController));
+        router.get(
+          apiRoute,
+          ...middlewares,
+          instanceOfController[method].bind(instanceOfController)
+        );
       } else if (action.type === HTTP_METHODS_SUPPORTED.DELETE) {
-        router.delete(apiRoute, instanceOfController[method].bind(instanceOfController));
+        router.delete(
+          apiRoute,
+          ...middlewares,
+          instanceOfController[method].bind(instanceOfController)
+        );
+      } else {
+        throw Error(`Method is not allowed ${action.type}`);
       }
     }
   }

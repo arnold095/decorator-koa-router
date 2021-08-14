@@ -5,7 +5,7 @@ import {
   MethodTypes,
 } from './ControllerActions';
 
-export function httpPut(route: string, middleware?: MethodTypes['middleware']) {
+export function httpPut(route: string, ...middleware: MethodTypes['middleware']) {
   return function (object: Object, methodName: string): void {
     if (!ControllerActions[object.constructor.name]) {
       ControllerActions[object.constructor.name] = [];
