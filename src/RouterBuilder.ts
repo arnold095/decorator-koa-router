@@ -20,7 +20,11 @@ export const RouterBuilder = async (
       const apiRoute = `${controller.route}${action.route}`;
       const { method } = action;
       if (action.type === HTTP_METHODS_SUPPORTED.POST) {
-        router.post(apiRoute, instanceOfController[method].bind(instanceOfController));
+        router.post(
+          apiRoute,
+          ...controller.middleware,
+          instanceOfController[method].bind(instanceOfController)
+        );
       } else if (action.type === HTTP_METHODS_SUPPORTED.PUT) {
         router.put(apiRoute, instanceOfController[method].bind(instanceOfController));
       } else if (action.type === HTTP_METHODS_SUPPORTED.GET) {
