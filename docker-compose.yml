@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  checkout_service:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./package.json:/home/node/app/package.json
+      - ./tsconfig.json:/home/node/app/tsconfig.json
+      - ./src:/home/node/app/src
+      - ./tests:/home/node/app/tests
+    command: bash -c "npm run start:dev"
