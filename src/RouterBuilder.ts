@@ -18,7 +18,7 @@ export const RouterBuilder = async (
     const instanceOfController = iocAdapter.get<any>(controller.target.name);
     for (const action of controller.actions) {
       const middlewares = [...controller.middleware, ...action.middleware];
-      const apiRoute = `${controller.route}${action.route}`;
+      const apiRoute = `${controller.route}${action.route}`.replace(/\/\//g, '/');
       const { method } = action;
       if (action.type === HTTP_METHODS_SUPPORTED.POST) {
         router.post(
