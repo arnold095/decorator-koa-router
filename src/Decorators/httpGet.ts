@@ -3,7 +3,7 @@ import {
   ControllerActions,
   HTTP_METHODS_SUPPORTED,
   MethodTypes,
-} from './ControllerActions';
+} from '../ControllerActions';
 
 export function httpGet(route: string, ...middleware: MethodTypes['middleware']) {
   return function (object: Object, methodName: string): void {

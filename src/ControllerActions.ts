@@ -7,6 +7,12 @@ export enum HTTP_METHODS_SUPPORTED {
   DELETE = 'delete',
 }
 
+export const makeSureItIsASupportedMethod = (method: HTTP_METHODS_SUPPORTED): void => {
+  if (!Object.values(HTTP_METHODS_SUPPORTED).includes(method)) {
+    throw new Error(`This method is not allowed [${method}]`);
+  }
+};
+
 export type MethodTypes = {
   type: HTTP_METHODS_SUPPORTED;
   route: string;
@@ -14,7 +20,7 @@ export type MethodTypes = {
   middleware: ((context: Context, next: Next) => Promise<void>)[];
 };
 
-export type ActionTypes = {
+type ActionTypes = {
   [controllerName: string]: MethodTypes[];
 };
 

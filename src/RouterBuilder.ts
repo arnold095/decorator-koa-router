@@ -1,9 +1,13 @@
 import 'reflect-metadata';
 import Router from '@koa/router';
 import { glob } from 'glob';
-import { ControllerActionsMapper } from './Utils/ControllerActionsMapper';
+import { ControllerActionsMapper, ControllerTypes } from './ControllerActionsMapper';
 import { IocAdapter } from './IocAdapter';
-import { HTTP_METHODS_SUPPORTED } from './Decorators';
+import {
+  HTTP_METHODS_SUPPORTED,
+  makeSureItIsASupportedMethod,
+  MethodTypes,
+} from './ControllerActions';
 
 export const RouterBuilder = async (
   prefix = '/',
@@ -17,40 +21,41 @@ export const RouterBuilder = async (
     if (!controller.actions) continue;
     const instanceOfController = iocAdapter.get<any>(controller.target.name);
     for (const action of controller.actions) {
-      const middlewares = [...controller.middleware, ...action.middleware];
-      const apiRoute = `${controller.route}${action.route}`.replace(/\/\//g, '/');
-      const { method } = action;
-      if (action.type === HTTP_METHODS_SUPPORTED.POST) {
-        router.post(
-          apiRoute,
-          ...middlewares,
-          instanceOfController[method].bind(instanceOfController)
-        );
-      } else if (action.type === HTTP_METHODS_SUPPORTED.PUT) {
-        router.put(
-          apiRoute,
-          ...middlewares,
-          instanceOfController[method].bind(instanceOfController)
-        );
-      } else if (action.type === HTTP_METHODS_SUPPORTED.GET) {
-        router.get(
-          apiRoute,
-          ...middlewares,
-          instanceOfController[method].bind(instanceOfController)
-        );
-      } else if (action.type === HTTP_METHODS_SUPPORTED.DELETE) {
-        console.info(apiRoute);
-        router.delete(
-          apiRoute,
-          ...middlewares,
-          instanceOfController[method].bind(instanceOfController)
-        );
-      } else {
-        throw Error(`Method is not allowed ${action.type}`);
-      }
+      makeSureItIsASupportedMethod(action.type);
+      declareRoute(
+        router,
+        action.type,
+        apiRoute(controller.route, action.route),
+        middlewares(controller.middleware, action.middleware),
+        instanceOfController,
+        action.method
+      );
     }
   }
   return router.routes();
+};
+
+const apiRoute = (controllerRoute: string, methodRoute: string) =>
+  `${controllerRoute}${methodRoute}`.replace(/\/\//g, '/');
+
+const middlewares = (
+  controllerMiddleware: ControllerTypes['middleware'],
+  actionMiddleware: MethodTypes['middleware']
+) => [...controllerMiddleware, ...actionMiddleware];
+
+const declareRoute = (
+  router: Router,
+  httpMethod: HTTP_METHODS_SUPPORTED,
+  route: string,
+  middlewares: ControllerTypes['middleware'],
+  controller: any,
+  controllerMethod: string
+): void => {
+  router[httpMethod](
+    route,
+    ...middlewares,
+    controller[controllerMethod].bind(controller)
+  );
 };
 
 const loadRoutes = async (controllersPath: string): Promise<void> => {

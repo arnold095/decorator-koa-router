@@ -1,9 +1,14 @@
-import {
-  Controllers,
-  ControllerTypes,
-  ControllerActions,
-  MethodTypes,
-} from '../Decorators/';
+/* eslint-disable @typescript-eslint/ban-types */
+import { ControllerActions, MethodTypes } from './ControllerActions';
+import { Context, Next } from 'koa';
+
+export type ControllerTypes = {
+  target: Object & { name: string };
+  route: string;
+  middleware: ((context: Context, next: Next) => Promise<void>)[];
+};
+
+export const Controllers: ControllerTypes[] = [];
 
 type ControllerWithActions = {
   actions: MethodTypes[];
