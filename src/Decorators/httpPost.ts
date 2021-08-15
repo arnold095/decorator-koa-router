@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ControllerActions, HTTP_METHODS_SUPPORTED, MethodTypes } from '@decorators';
+import {
+  ControllerActions,
+  HTTP_METHODS_SUPPORTED,
+  MethodTypes,
+} from './ControllerActions';
 
 export function httpPost(route: string, ...middleware: MethodTypes['middleware']) {
   return function (object: Object, methodName: string): void {

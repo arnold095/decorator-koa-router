@@ -3,7 +3,7 @@ import {
   ControllerTypes,
   ControllerActions,
   MethodTypes,
-} from '@decorators';
+} from '../Decorators/';
 
 type ControllerWithActions = {
   actions: MethodTypes[];

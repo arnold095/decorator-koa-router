@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "strict": false,
-    "declaration": false,
+    "declaration": true,
   },
   "exclude": [
     "node_modules",

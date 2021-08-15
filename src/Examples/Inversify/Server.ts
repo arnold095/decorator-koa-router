@@ -1,14 +1,14 @@
 import 'reflect-metadata';
 import Koa from 'koa';
-import path from 'path';
-import { InversifyIocAdapter } from './InversifyIocAdapter';
+import { join } from 'path';
 import { RouterBuilder } from '../../RouterBuilder';
+import { InversifyIocAdapter } from './InversifyIocAdapter';
 
 export class Server {
   public static async load(): Promise<void> {
     const port = 3000;
     const koaServer = new Koa();
-    const controllersPath = path.join(__dirname, './Controllers/*.ts');
+    const controllersPath = join(__dirname, './Controllers/*.ts');
     const iocAdapter = new InversifyIocAdapter();
     const router = await RouterBuilder('/api', iocAdapter, controllersPath);
     koaServer.use(router);

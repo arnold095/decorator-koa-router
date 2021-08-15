@@ -3,7 +3,7 @@ import Router from '@koa/router';
 import { glob } from 'glob';
 import { ControllerActionsMapper } from './Utils/ControllerActionsMapper';
 import { IocAdapter } from './IocAdapter';
-import { HTTP_METHODS_SUPPORTED } from '@decorators';
+import { HTTP_METHODS_SUPPORTED } from './Decorators';
 
 export const RouterBuilder = async (
   prefix = '/',
@@ -39,6 +39,7 @@ export const RouterBuilder = async (
           instanceOfController[method].bind(instanceOfController)
         );
       } else if (action.type === HTTP_METHODS_SUPPORTED.DELETE) {
+        console.info(apiRoute);
         router.delete(
           apiRoute,
           ...middlewares,

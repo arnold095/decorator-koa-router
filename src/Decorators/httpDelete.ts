@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ControllerActions, HTTP_METHODS_SUPPORTED, MethodTypes } from '@decorators';
+import {
+  ControllerActions,
+  HTTP_METHODS_SUPPORTED,
+  MethodTypes,
+} from './ControllerActions';
 
 export function httpDelete(route: string, ...middleware: MethodTypes['middleware']) {
   return function (object: Object, methodName: string): void {
@@ -7,7 +11,7 @@ export function httpDelete(route: string, ...middleware: MethodTypes['middleware
       ControllerActions[object.constructor.name] = [];
     }
     const definition = {
-      type: HTTP_METHODS_SUPPORTED.GET,
+      type: HTTP_METHODS_SUPPORTED.DELETE,
       route,
       method: methodName,
       middleware,
