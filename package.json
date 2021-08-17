@@ -1,6 +1,6 @@
 {
   "name": "decorator-koa-router",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Package to declare koa controllers via decorators",
   "main": "index.js",
   "scripts": {
