@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --build tsconfig.prod.json",
-    "dev:node-dependency-injection": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Examples/NodeDependencyInjection/Server.ts -e ts",
-    "dev:inversify": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Examples/Inversify/Server.ts -e ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint '**/src/**/*.ts' --quiet --fix"
   },
@@ -22,6 +20,8 @@
     "Koa",
     "Router",
     "Decorators",
+    "Controllers",
+    "Routing Controllers",
     "Koa rounting decorators",
     "Inversify",
     "IOC"
@@ -38,9 +38,7 @@
   "license": "ISC",
   "devDependencies": {
     "@koa/router": "10.1.0",
-    "@types/faker": "5.5.6",
     "@types/glob": "7.1.4",
-    "@types/jest": "26.0.23",
     "@types/koa": "2.13.4",
     "@types/koa__router": "8.0.7",
     "@types/node": "15.12.1",
@@ -55,10 +53,8 @@
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-promise": "5.1.0",
     "glob": "7.1.7",
-    "inversify": "5.1.1",
     "koa": "2.13.1",
     "lint-staged": "11.1.2",
-    "node-dependency-injection": "2.7.1",
     "nodemon": "2.0.7",
     "prettier": "2.3.2",
     "ts-node": "10.0.0",

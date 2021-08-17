@@ -11,6 +11,8 @@ To use this library it is necessary to work with a dependency container.
 
 Examples have been made with the InversifyJS and node-dependency-injection packages.
 
+The examples are in this repository: <a href="https://github.com/arnold095/test-koa-router">test-koa-router</a>
+
 You can integrate any other dependency injector as long as it complies with the "IocAdapter" interface
 
 
@@ -22,7 +24,7 @@ import 'reflect-metadata';
 import Koa from 'koa';
 import { join } from 'path';
 import { InversifyIocAdapter } from './InversifyIocAdapter';
-import { RouterBuilder } from '../../RouterBuilder';
+import { RouterBuilder } from 'decorator-koa-router';
 
 export class Server {
   public static async load(): Promise<void> {
@@ -109,7 +111,7 @@ ProductController
 ```ts
 import { Context, Response } from 'koa';
 import { ProductFinder } from '../Services/Product/ProductFinder';
-import { controller, httpPost, httpPut, httpGet, httpDelete } from '@decorators';
+import { controller, httpDelete, httpGet, httpPost, httpPut } from 'decorator-koa-router';
 import { inject, injectable } from 'inversify';
 import { ProductCreator } from '../Services/Product/ProductCreator';
 import { ProductModifier } from '../Services/Product/ProductModifier';
@@ -177,7 +179,7 @@ import 'reflect-metadata';
 import Koa from 'koa';
 import { join } from 'path';
 import { RouterBuilder } from '../../RouterBuilder';
-import { NodeDependencyInjectionIocAdapter } from './NodeDependencyInjectionIocAdapter';
+import { RouterBuilder } from 'decorator-koa-router';
 
 export class Server {
   public static async load(): Promise<void> {
@@ -218,7 +220,7 @@ ProductController.ts
 ```ts
 import { Context, Next, Response } from 'koa';
 import { ProductFinder } from '../Services/Product/ProductFinder';
-import { controller, httpPost, httpPut, httpGet, httpDelete } from '@decorators';
+import { controller, httpDelete, httpGet, httpPost, httpPut } from 'decorator-koa-router';
 import { ProductCreator } from '../Services/Product/ProductCreator';
 import { ProductModifier } from '../Services/Product/ProductModifier';
 import { ProductRemover } from '../Services/Product/ProductRemover';
