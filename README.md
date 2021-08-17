@@ -287,3 +287,13 @@ export class ProductFinder {
   }
 }
 ```
+
+### Decorators reference
+
+| Signature                            | Example                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@controller(controllerRoute: string, ...middlewares)`     | `@controller("/product") class ProductController`         | class defined as controller, the paths of the methods that contain this class will be concatenated.
+| `@httpGet(methodRoute: string, ...middlewares)`     | `@httpGet("/") async getProduct()`         | This decorator defines a route of type GET    
+| `@httpPost(methodRoute: string, ...middlewares)`     | `@httpPost("/") async createProduct()`         | This decorator defines a route of type POST    
+| `@httpPut(methodRoute: string, ...middlewares)`     | `@httpPut("/:productId") async updateProduct()`         | This decorator defines a route of type PUT    
+| `@httpDelete(methodRoute: string, ...middlewares)`     | `@httpDelete("/:productId") async removeProduct()`         | This decorator defines a route of type DELETE
